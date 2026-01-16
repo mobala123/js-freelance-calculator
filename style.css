@@ -1,0 +1,78 @@
+:root {
+    --primary: #2ecc71;
+    --dark: #2c3e50;
+    --light: #ecf0f1;
+    --space-md: 1.5rem;
+}
+
+body {
+    font-family: system-ui, sans-serif;
+    background: var(--dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.calculator-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.input-group {
+    margin-bottom: var(--space-md);
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--dark);
+}
+
+input {
+    padding: 0.8rem;
+    border: 2px solid var(--light);
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+button {
+    width: 100%;
+    padding: 1rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #27ae60;
+}
+
+.result-area {
+    margin-top: 2rem;
+    text-align: center;
+    padding-top: 1rem;
+    border-top: 2px dashed var(--light);
+}
+
+.rate-display {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.hidden {
+    display: none;
+}

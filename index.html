@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelance Rate Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator-card">
+        <header>
+            <h1>Freelance Rate Calc</h1>
+            <p>Know your worth.</p>
+        </header>
+
+        <form id="calc-form">
+            <div class="input-group">
+                <label for="annual-income">Desired Annual Income ($)</label>
+                <input type="number" id="annual-income" placeholder="e.g. 80000">
+            </div>
+
+            <div class="input-group">
+                <label for="monthly-expenses">Monthly Business Costs ($)</label>
+                <input type="number" id="monthly-expenses" placeholder="e.g. 500">
+            </div>
+
+            <div class="input-group">
+                <label for="billable-hours">Billable Hours per Week</label>
+                <input type="number" id="billable-hours" placeholder="e.g. 30">
+            </div>
+
+            <div class="input-group">
+                <label for="vacation-weeks">Vacation Weeks per Year</label>
+                <input type="number" id="vacation-weeks" placeholder="e.g. 4">
+            </div>
+            
+            <button type="button" id="calculate-btn">Calculate Rate</button>
+        </form>
+
+        <div class="result-area hidden">
+            <h2>Your Minimum Hourly Rate:</h2>
+            <div class="rate-display">$<span id="hourly-rate">0.00</span>/hr</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
