@@ -1,4 +1,4 @@
-// 1. Select Elements (The DOM)
+// 1. Select Elements
 const incomeInput = document.getElementById('annual-income');
 const expensesInput = document.getElementById('monthly-expenses');
 const hoursInput = document.getElementById('billable-hours');
@@ -7,33 +7,46 @@ const calculateBtn = document.getElementById('calculate-btn');
 const resultArea = document.querySelector('.result-area');
 const rateDisplay = document.getElementById('hourly-rate');
 
-// 2. The Logic Function
+// 2. NEW: Load data from LocalStorage when the page opens
+window.addEventListener('DOMContentLoaded', () => {
+    const savedData = JSON.parse(localStorage.getItem('freelanceData'));
+    
+    if (savedData) {
+        incomeInput.value = savedData.income;
+        expensesInput.value = savedData.expenses;
+        hoursInput.value = savedData.hours;
+        vacationInput.value = savedData.vacation;
+        calculateRate(); // Automatically calculate if data exists
+    }
+});
+
+// 3. The Logic Function
 function calculateRate() {
-    // Get values (or default to 0)
     const annualIncome = parseFloat(incomeInput.value) || 0;
     const monthlyExpenses = parseFloat(expensesInput.value) || 0;
     const weeklyHours = parseFloat(hoursInput.value) || 0;
     const vacationWeeks = parseFloat(vacationInput.value) || 0;
 
-    // The Freelance Math
-    const totalExpenses = monthlyExpenses * 12;
-    const totalTarget = annualIncome + totalExpenses;
-    
-    const workingWeeks = 52 - vacationWeeks;
-    const totalBillableHours = workingWeeks * weeklyHours;
+    // Save inputs to an object
+    const dataToSave = {
+        income: annualIncome,
+        expenses: monthlyExpenses,
+        hours: weeklyHours,
+        vacation: vacationWeeks
+    };
 
-    // Avoid dividing by zero
-    if (totalBillableHours <= 0) {
-        alert("Please enter valid working hours!");
-        return;
-    }
+    // Store in LocalStorage (must be a string)
+    localStorage.setItem('freelanceData', JSON.stringify(dataToSave));
+
+    const totalTarget = annualIncome + (monthlyExpenses * 12);
+    const totalBillableHours = (52 - vacationWeeks) * weeklyHours;
+
+    if (totalBillableHours <= 0) return;
 
     const hourlyRate = totalTarget / totalBillableHours;
 
-    // 3. Update the UI
-    rateDisplay.innerText = hourlyRate.toFixed(2); // 2 decimal places
+    rateDisplay.innerText = hourlyRate.toFixed(2);
     resultArea.classList.remove('hidden');
 }
 
-// 4. Add Event Listener
 calculateBtn.addEventListener('click', calculateRate);
